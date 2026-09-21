@@ -29,49 +29,49 @@ A GitHub Account to launch GitHub Codespaces.
 
 2) Install the AWS CDK CLI globally using npm
 
-<PRE>npm install -g aws-cdk</PRE>
-<PRE>cdk --version</PRE>
+   <PRE>npm install -g aws-cdk</PRE>
+   <PRE>cdk --version</PRE>
 
 
 3) Install the AWS CLI v2 inside your Codespace:
 
-<PRE>curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"</PRE>
-<PRE>unzip awscliv2.zip</PRE>
-<PRE>sudo ./aws/install</PRE>
-<PRE>aws --version</PRE>
-<PRE>rm awscliv2.zip</PRE>
+   <PRE>curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"</PRE>
+   <PRE>unzip awscliv2.zip</PRE>
+   <PRE>sudo ./aws/install</PRE>
+   <PRE>aws --version</PRE>
+   <PRE>rm awscliv2.zip</PRE>
 
 
 ### Phase 2: AWS Credentials & Environment Bootstrapping
 
 1) Authenticate with your AWS Account:
 
-<PRE>aws configure</PRE>
+   <PRE>aws configure</PRE>
 
-(Enter your AWS Access Key ID, AWS Secret Access Key, default region e.g., eu-north-1, and json output format).
+   (Enter your AWS Access Key ID, AWS Secret Access Key, default region e.g., eu-north-1, and json output format).
 
 
 2) Verify authentication identity:
 
-<PRE>aws sts get-caller-identity</PRE>
+   <PRE>aws sts get-caller-identity</PRE>
 
 
 3) Bootstrap the AWS CDK Environment:
-Run the bootstrapping process to deploy the required CDKToolkit stack into your AWS Account:
+   Run the bootstrapping process to deploy the required CDKToolkit stack into your AWS Account:
 
-<PRE>cdk bootstrap aws://<YOUR_ACCOUNT_ID>/<YOUR_REGION></PRE>
-<PRE>cdk bootstrap aws://140023390772/eu-north-1</PRE>
+   <PRE>cdk bootstrap aws://<YOUR_ACCOUNT_ID>/<YOUR_REGION></PRE>
+   <PRE>cdk bootstrap aws://140023390772/eu-north-1</PRE>
 
 
 4) What does cdk bootstrap do?
 
-It creates a CloudFormation stack named CDKToolkit provisioning:
+   It creates a CloudFormation stack named CDKToolkit provisioning:
 
-An S3 Bucket for hosting CDK assets and code packages.
+   An S3 Bucket for hosting CDK assets and code packages.
 
-An ECR Repository for container images (if applicable).
+   An ECR Repository for container images (if applicable).
 
-IAM Roles granting CDK the permissions to manage resources on your behalf.
+   IAM Roles granting CDK the permissions to manage resources on your behalf.
 
 
 
@@ -79,12 +79,12 @@ IAM Roles granting CDK the permissions to manage resources on your behalf.
 
 1) Create and enter a new project folder:
 
-<PRE>mkdir cdk-python && cd cdk-python</PRE>
+   <PRE>mkdir cdk-python && cd cdk-python</PRE>
 
 
 2) Initialize an AWS CDK application scaffolding with Python:
 
-<PRE>cdk init app --language python</PRE>
+   <PRE>cdk init app --language python</PRE>
 
 
 ### Phase 4: Understanding CDK Project FilesFile / FolderFunction & Description
@@ -111,39 +111,39 @@ IAM Roles granting CDK the permissions to manage resources on your behalf.
 
 1) Activate the project-specific virtual environment and install project packages:
 
-<PRE>source .venv/bin/activate</PRE>
-<PRE>which python3</PRE>
-<PRE>pip install --upgrade pip</PRE>
-<PRE>pip install -r requirements.txt</PRE>
+   <PRE>source .venv/bin/activate</PRE>
+   <PRE>which python3</PRE>
+   <PRE>pip install --upgrade pip</PRE>
+   <PRE>pip install -r requirements.txt</PRE>
 
 
 ### Phase 7: Synthesis & Deployment
 
 1) Synthesize the CloudFormation Template:
-Convert Python code into a CloudFormation template artifact (saved inside cdk.out/):
+   Convert Python code into a CloudFormation template artifact (saved inside cdk.out/):
 
-<PRE>cdk synth</PRE>
+   <PRE>cdk synth</PRE>
 
 
 2) Inspect Infrastructure Drift & Changes:
-Compare the local CDK state against the running AWS environment:
+   Compare the local CDK state against the running AWS environment:
 
-<PRE>cdk diff</PRE>
+   <PRE>cdk diff</PRE>
 
 
 3) Deploy the Infrastructure:
-Provision the stack into your AWS account:
+   Provision the stack into your AWS account:
 
-<PRE>cdk deploy</PRE>
+   <PRE>cdk deploy</PRE>
 
 
 4) Verification:
 
-Open the AWS CloudFormation Console in your target region (eu-north-1).
+   Open the AWS CloudFormation Console in your target region (eu-north-1).
 
-Confirm that CdkPythonStack has completed provisioning with status CREATE_COMPLETE.
+   Confirm that CdkPythonStack has completed provisioning with status CREATE_COMPLETE.
 
-Open the Amazon SQS Console to view the newly created SQS queue.
+   Open the Amazon SQS Console to view the newly created SQS queue.
 
 
 
@@ -155,22 +155,22 @@ Open the Amazon SQS Console to view the newly created SQS queue.
 
 3) Evaluate the deployment diff:
 
-<PRE>cdk diff</PRE>
+   <PRE>cdk diff</PRE>
 
-Output indicates that the old queue (CdkPythonQueue) will be destroyed and replaced by the new queue (QueueInfrastructure).
+   Output indicates that the old queue (CdkPythonQueue) will be destroyed and replaced by the new queue (QueueInfrastructure).
 
 4) Deploy the replacement:
 
-<PRE>cdk deploy</PRE>
+   <PRE>cdk deploy</PRE>
 
 
 ## INFRASTRUCTURE TEARDOWN
 
 1) To destroy the SQS queue stack and remove all provisioned CloudFormation resources:
 
-<PRE>cdk destroy</PRE>
+   <PRE>cdk destroy</PRE>
 
-Confirm stack removal when prompted in the terminal.
+   Confirm stack removal when prompted in the terminal.
 
 
 
